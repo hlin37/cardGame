@@ -22,9 +22,10 @@ public class CardsDatabase : MonoBehaviour
             }
             else {
                 string[] linesOfText = readAllLines("white");
-                for (int index = 0; index < 20; index++) {
+                for (int index = 0; index < 22; index++) {
                     Card whiteCard = new Card();
                     whiteCard.setText(linesOfText, index);
+                    whiteCard.setNumber(index);
                     whiteList.Add(whiteCard);
                 }
             }

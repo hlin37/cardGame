@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5019088337669410798}
   - component: {fileID: 7890637163107829116}
   - component: {fileID: 8701520247349795398}
+  - component: {fileID: 2359880297102210744}
   m_Layer: 5
   m_Name: RedCard
   m_TagString: Untagged
@@ -89,7 +90,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8995256cccad4088a9c7ff59233eac0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  redHand: {fileID: 7452454065653812037, guid: f307980a8b36a436ea7b21f2415819b2, type: 3}
   It: {fileID: 1139522154619121376}
   _deck: {fileID: 6808292428348175949, guid: 55035d6b904994cb1a93bd9af07d263c, type: 3}
   redText: {fileID: 5367672226747115623}
@@ -127,9 +127,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 738a670ec95aa428da0065870776df42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  img: {fileID: 8828191151817807738}
   selectBlue: {r: 0, g: 0.7653674, b: 0.9622642, a: 1}
   unSelectRed: {r: 1, g: 0, b: 0, a: 1}
   unSelectWhite: {r: 1, g: 1, b: 1, a: 1}
+  gameManager: {fileID: 6484824945938997909, guid: 3556747e6567d44cb8f9d40ba24eebd1,
+    type: 3}
+--- !u!114 &2359880297102210744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139522154619121376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 377cfe51c9d8c4809a51beb0de70773f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whiteCardBack: {fileID: 21300000, guid: 32b5e5dbc1cf04e99a1b6fbe378d0039, type: 3}
+  redCardBack: {fileID: 21300000, guid: dca95cf1b594a478997947a3a570d355, type: 3}
+  image: {fileID: 8828191151817807738}
+  text: {fileID: 5367672226747115623}
+  colorWhite: {r: 0.990566, g: 0.9578586, b: 0.9578586, a: 0}
+  colorRed: {r: 1, g: 0, b: 0, a: 0}
 --- !u!1 &1271990880165532058
 GameObject:
   m_ObjectHideFlags: 0

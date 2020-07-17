@@ -44,9 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef3d4dcef33aa47da80ee5b2e208afb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 1250246776812366999, guid: c305d3d5eb96a43cc8244bfbb60e6aa4,
+  playerCameraPrefab: {fileID: 1250246776812366953, guid: c305d3d5eb96a43cc8244bfbb60e6aa4,
     type: 3}
   canvasesXYZ: []
+  playedCanvasPrefab: {fileID: 8154674918988520871, guid: 65e86f337aa1543ed9ab0e23acb5d624,
+    type: 3}
 --- !u!114 &6484824946176438327
 MonoBehaviour:
   m_ObjectHideFlags: 0

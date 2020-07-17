@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3085258941717759607}
   - component: {fileID: 8725505812677112961}
   - component: {fileID: 3467595986489345191}
+  - component: {fileID: 1928147041094760201}
   m_Layer: 0
   m_Name: Submit
   m_TagString: Untagged
@@ -35,9 +36,9 @@ RectTransform:
   m_Father: {fileID: 1605124077344305738}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3.5, y: -332.7}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 250, y: -741}
   m_SizeDelta: {x: 390.17133, y: 104.68021}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2800187940527671098
@@ -139,12 +140,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb28aff48ff974312a160c06a2305ef5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  listOfCard: []
-  list: []
-  dropZone: {fileID: 7721108215711604798}
-  whiteHand: {fileID: 2373522326994896734, guid: 036c2633f613440c0895fcdb2933643e,
-    type: 3}
-  redHand: {fileID: 7452454065653812037, guid: f307980a8b36a436ea7b21f2415819b2, type: 3}
+  button: {fileID: 774618922964538035}
+  unSelectWhite: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &1928147041094760201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774618922964538035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 1
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!1 &1502663242306747469
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,9 +570,11 @@ GameObject:
   - component: {fileID: 1605124077344305738}
   - component: {fileID: 5686487098971945680}
   - component: {fileID: 4659577453241943484}
+  - component: {fileID: 6972922253851869420}
+  - component: {fileID: 7962161786761623391}
   m_Layer: 5
   m_Name: Player1DropZone
-  m_TagString: Untagged
+  m_TagString: DropZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -616,3 +635,40 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6972922253851869420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7721108215711604798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48b751e3d2ec4485cb0b0cbd7e1e95f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placedCards: 0
+--- !u!114 &7962161786761623391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7721108215711604798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 180, y: 270}
+  m_Spacing: {x: 30, y: 40}
+  m_Constraint: 0
+  m_ConstraintCount: 2

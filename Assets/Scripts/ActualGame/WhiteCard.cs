@@ -25,6 +25,8 @@ public class WhiteCard : MonoBehaviourPun
 
     private string _player = "Player";
 
+    public int uniqueCardNumber;
+
     public void setParent(int number) {
         whiteHand = GameObject.Find(_player + number + _whiteHand);
         whiteCard.transform.SetParent(whiteHand.transform);
@@ -35,6 +37,7 @@ public class WhiteCard : MonoBehaviourPun
     public void setCardText() {
         Card newCard = deck.returnWhiteDeck().Dequeue();
         whiteText.text = newCard.description;
+        uniqueCardNumber = newCard.num;
     }
 
     void Awake() {

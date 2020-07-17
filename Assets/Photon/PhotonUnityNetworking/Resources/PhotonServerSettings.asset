@@ -40,6 +40,8 @@ MonoBehaviour:
   - spawn
   - kill
   - localCamera
+  - createCamera
+  - createPlayedCanvas
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

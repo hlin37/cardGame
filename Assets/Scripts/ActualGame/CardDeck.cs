@@ -20,13 +20,13 @@ public class CardDeck : MonoBehaviourPunCallbacks
     public int playerNumber;
 
     public void distributeCards() {
-        for (int index = 1; index < 3; index++) {
+        for (int index = 1; index < 4; index++) {
             playerNumber = index;
             for (int i = 0; i < 3; i++) {
-                GameObject redCard = Instantiate(redCardPrefab, transform.position, transform.rotation);
+                GameObject redCard = PhotonNetwork.Instantiate(redCardPrefab.name, transform.position, transform.rotation);
             }
             for (int i = 0; i < 4; i++) {
-                GameObject whiteCard = Instantiate(whiteCardPrefab, transform.position, transform.rotation);
+                GameObject whiteCard = PhotonNetwork.Instantiate(whiteCardPrefab.name, transform.position, transform.rotation);
             }
         }
     }
@@ -43,7 +43,7 @@ public class CardDeck : MonoBehaviourPunCallbacks
     }
 
     private void createWhiteDeck() {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             whiteDeck.Enqueue(database.whiteList[i]);
         }
     }

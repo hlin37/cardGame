@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 1911804166242578671}
   m_Layer: 5
   m_Name: DropZone
-  m_TagString: Untagged
+  m_TagString: DropZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -290,8 +290,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb28aff48ff974312a160c06a2305ef5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  listOfCard: []
-  list: []
   dropZone: {fileID: 1911804166242578669}
   whiteHand: {fileID: 2373522326994896734, guid: 036c2633f613440c0895fcdb2933643e,
     type: 3}

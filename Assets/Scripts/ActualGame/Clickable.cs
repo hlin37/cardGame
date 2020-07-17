@@ -8,8 +8,7 @@ public class Clickable : MonoBehaviour, ISelectHandler, IDeselectHandler, IPoint
 {
     public static List<Clickable> allSelectables = new List<Clickable>();
 
-    public static List<Clickable> current = new List<Clickable>();
-
+    [SerializeField]
     private Image img;
 
     [SerializeField]
@@ -21,9 +20,17 @@ public class Clickable : MonoBehaviour, ISelectHandler, IDeselectHandler, IPoint
     [SerializeField]
     private Color unSelectWhite;
 
+    private GameManagerScript gameManagerScript;
+
     void Awake() {
         allSelectables.Add(this);
-        img = GetComponent<Image>();
+        img = this.GetComponent<Image>();
+    }
+
+    void Start() {
+        GameObject gameManager = GameObject.Find("GameManager");
+        gameManagerScript = gameManager.GetComponent<GameManagerScript>();
+
     }
 
     public void OnPointerClick(PointerEventData eventData) {
@@ -31,46 +38,51 @@ public class Clickable : MonoBehaviour, ISelectHandler, IDeselectHandler, IPoint
     }
 
     public void OnSelect(BaseEventData eventData) {
-        if (this.gameObject.name.Contains("White")) {
-            if (current.Count == 2 && !current.Contains(this)) {
-                current[0].OnDeselect(eventData);
-                current.RemoveAt(0);
+        if (gameManagerScript.selectingWhiteCards) {
+            if (this.gameObject.name.Contains("Red")) {
+                img.color = unSelectRed;
             }
-            if (!current.Contains(this)) {
-                current.Add(this);
-                img.color = selectBlue;
-            }
-            else {
-                int selectedNumber = 0;
-                for (int i = 0; i < current.Count; i++) {
-                    Clickable select = current[i];
-                    if (select == this) {
-                        select.OnDeselect(eventData);
-                        selectedNumber = i;
-                    }
+            else if (this.gameObject.name.Contains("White")) {
+                int index = int.Parse(this.gameObject.transform.parent.name[6].ToString());
+                if (!gameManagerScript.clicked.ContainsKey(index)) {
+                    gameManagerScript.clicked.Add(index, new List<GameObject>());
                 }
-                current.RemoveAt(selectedNumber);
+                if (gameManagerScript.clicked[index].Count == 2 && !gameManagerScript.clicked[index].Contains(this.gameObject)) {
+                    gameManagerScript.clicked[index][0].GetComponent<Clickable>().OnDeselect(eventData);
+                    gameManagerScript.clicked[index].RemoveAt(0);
+                    gameManagerScript.clicked[index].Add(this.gameObject);
+                    img.color = selectBlue;
+                }
+                else if (gameManagerScript.clicked[index].Contains(this.gameObject)) {
+                    gameManagerScript.clicked[index].Remove(this.gameObject);
+                    img.color = unSelectWhite;
+                }
+                else if (!gameManagerScript.clicked[index].Contains(this.gameObject)) {
+                    gameManagerScript.clicked[index].Add(this.gameObject);
+                    img.color = selectBlue;
+                }
             }
         }
         else {
-            if (current.Count == 1 && !current.Contains(this)) {
-                current[0].OnDeselect(eventData);
-                current.RemoveAt(0);
+            if (this.gameObject.name.Contains("White")) {
+                img.color = unSelectWhite;
             }
-            if (!current.Contains(this)) {
-                current.Add(this);
-                img.color = selectBlue;
-            }
-            else {
-                int selectedNumber = 0;
-                for (int i = 0; i < current.Count; i++) {
-                    Clickable select = current[i];
-                    if (select == this) {
-                        select.OnDeselect(eventData);
-                        selectedNumber = i;
-                    }
+            else if (this.gameObject.name.Contains("Red")) {
+                int index = int.Parse(this.gameObject.transform.parent.name[6].ToString());
+                if (gameManagerScript.clicked[index].Count == 1 && !gameManagerScript.clicked[index].Contains(this.gameObject)) {
+                    gameManagerScript.clicked[index][0].GetComponent<Clickable>().OnDeselect(eventData);
+                    gameManagerScript.clicked[index].RemoveAt(0);
+                    gameManagerScript.clicked[index].Add(this.gameObject);
+                    img.color = selectBlue;
                 }
-                current.RemoveAt(selectedNumber);
+                else if (gameManagerScript.clicked[index].Contains(this.gameObject)) {
+                    gameManagerScript.clicked[index].Remove(this.gameObject);
+                    img.color = unSelectWhite;
+                }
+                else if (!gameManagerScript.clicked[index].Contains(this.gameObject)) {
+                    gameManagerScript.clicked[index].Add(this.gameObject);
+                    img.color = selectBlue;
+                }
             }
         }
     }
@@ -82,5 +94,9 @@ public class Clickable : MonoBehaviour, ISelectHandler, IDeselectHandler, IPoint
         else {
             img.color = unSelectRed;
         }
+    }
+
+    public void returntoWhite() {
+        img.color = unSelectWhite;
     }
 }

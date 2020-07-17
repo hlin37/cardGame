@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 4844935219898716760}
   - component: {fileID: 4987178174074479813}
   - component: {fileID: 8036643744726642205}
+  - component: {fileID: 4931248473334159456}
   m_Layer: 5
   m_Name: WhiteCard
   m_TagString: Untagged
@@ -205,6 +206,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 738a670ec95aa428da0065870776df42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  img: {fileID: 927611588573581515}
   selectBlue: {r: 0, g: 0.6748581, b: 1, a: 1}
   unSelectRed: {r: 1, g: 0, b: 0, a: 1}
   unSelectWhite: {r: 1, g: 1, b: 1, a: 1}
+  gameManager: {fileID: 6484824945938997909, guid: 3556747e6567d44cb8f9d40ba24eebd1,
+    type: 3}
+--- !u!114 &4931248473334159456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2994726410676417661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 377cfe51c9d8c4809a51beb0de70773f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whiteCardBack: {fileID: 21300000, guid: 32b5e5dbc1cf04e99a1b6fbe378d0039, type: 3}
+  redCardBack: {fileID: 21300000, guid: dca95cf1b594a478997947a3a570d355, type: 3}
+  image: {fileID: 927611588573581515}
+  text: {fileID: 8042347761963127284}
+  colorWhite: {r: 1, g: 0.995283, b: 0.995283, a: 0}
+  colorRed: {r: 1, g: 0, b: 0, a: 0}

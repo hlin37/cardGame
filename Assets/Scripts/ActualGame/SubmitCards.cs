@@ -1,18 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SubmitCards : MonoBehaviour
 {
-    // public List<Clickable> listOfCard = new List<Clickable>();
+    public GameObject button;
 
-    public List<GameObject> list = new List<GameObject>();
-    
-    public GameObject dropZone;
+    private GameManagerScript gameManagerScript;
 
-    public GameObject whiteHand;
+    private GameObject dropZone;
 
-    public GameObject redHand;
+    private GameObject whiteHand;
+
+    private GameObject redHand;
 
     private string _whiteHand = "WhiteHand";
 
@@ -22,61 +23,34 @@ public class SubmitCards : MonoBehaviour
 
     private string _player = "Player";
 
-    public Dictionary<int, List<GameObject>> cards = new Dictionary<int, List<GameObject>>();
+    [SerializeField]
+    private Color unSelectWhite;
 
     public void OnClick() {
-        getObjects();
-        //dropZone = GameObject.Find("DropZone");
-        //whiteHand = GameObject.Find("WhiteHand");
-        //redHand = GameObject.Find("RedHand");
-        if (list.Count == 2) {
-            foreach (KeyValuePair<int, List<GameObject>> whiteCards in cards) {
-                int key = whiteCards.Key;
-                List<GameObject> car = whiteCards.Value;
-                foreach (GameObject card in car) {
-                    dropZone = GameObject.Find(_player + key.ToString() + _dropZone);
-                    whiteHand = GameObject.Find(_player + key.ToString() + _whiteHand);
-                    Transform child = whiteHand.transform.Find(card.name);
-                    child.SetParent(dropZone.transform, false);
-                }
-            }
-        }
-        else if (list.Count == 1) {
-            foreach (KeyValuePair<int, List<GameObject>> whiteCards in cards) {
-                int key = whiteCards.Key;
-                List<GameObject> car = whiteCards.Value;
-                foreach (GameObject card in car) {
-                    dropZone = GameObject.Find(_player + key.ToString() + _dropZone);
-                    redHand = GameObject.Find(_player + key.ToString() + _redHand);
-                    Transform child = whiteHand.transform.Find(card.name);
-                    child.SetParent(dropZone.transform, false);
-                }
-            }
+        int index = int.Parse(button.transform.parent.name[6].ToString());
+        print(index);
+        if (gameManagerScript.clicked[index].Count != 2) {
+            print("Not enough Cards");
         }
         else {
-            Debug.Log("Not Enough Cards");
+            dropZone = GameObject.Find(_player + index.ToString() + _dropZone);
+            whiteHand = GameObject.Find(_player + index.ToString() + _whiteHand);
+            foreach (GameObject card in gameManagerScript.clicked[index]) {
+                for (int i = 0; i < whiteHand.transform.childCount; i++) {
+                    if (whiteHand.transform.GetChild(i).GetComponent<WhiteCard>().uniqueCardNumber.Equals(card.GetComponent<WhiteCard>().uniqueCardNumber)) {
+                        Transform child = whiteHand.transform.GetChild(i);
+                        child.SetParent(dropZone.transform, false);
+                        card.GetComponent<Image>().color = unSelectWhite;
+                    }
+                }
+            }
+            dropZone.GetComponent<DropZone>().placedCards = true;
+            gameManagerScript.clicked[index].Clear();
         }
     }
 
-    public void getObjects() {
-        // listOfCard = Clickable.current;
-        foreach (Clickable stuff in Clickable.current) {
-            int index = System.Convert.ToInt32(stuff.gameObject.name[6]);
-            print(stuff.gameObject.name);
-            if (cards[index] == null) {
-                cards.Add(index, new List<GameObject>());
-            }
-            cards[index].Add(stuff.gameObject);
-        }
-        // if (listOfCard.Count == 1) {
-        //     for (int i = 0; i < 1; i++) {
-        //         list.Add(listOfCard[i].gameObject);
-        //     }
-        // }
-        // else if (listOfCard.Count == 2) {
-        //     for (int i = 0; i < 2; i++) {
-        //         list.Add(listOfCard[i].gameObject);
-        //     }
-        // }
+    void Start() {
+        GameObject gameManager = GameObject.Find("GameManager");
+        gameManagerScript = gameManager.GetComponent<GameManagerScript>();
     }
 }
