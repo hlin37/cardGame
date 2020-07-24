@@ -16,20 +16,7 @@ public class CardDeck : MonoBehaviourPunCallbacks
     private CardsDatabase database;
 
     public GameObject _cardsDatabase;
-    
     public int playerNumber;
-
-    public void distributeCards() {
-        for (int index = 1; index < 4; index++) {
-            playerNumber = index;
-            for (int i = 0; i < 3; i++) {
-                GameObject redCard = PhotonNetwork.Instantiate(redCardPrefab.name, transform.position, transform.rotation);
-            }
-            for (int i = 0; i < 4; i++) {
-                GameObject whiteCard = PhotonNetwork.Instantiate(whiteCardPrefab.name, transform.position, transform.rotation);
-            }
-        }
-    }
 
     public void createDeck() {
         createRedDeck();
@@ -54,6 +41,18 @@ public class CardDeck : MonoBehaviourPunCallbacks
 
     public Queue<Card> returnRedDeck() {
         return redDeck;
+    }
+
+    public void distributeCards() {
+        for (int index = 1; index < 4; index++) {
+            playerNumber = index;
+            for (int i = 0; i < 3; i++) {
+                GameObject redCard = Instantiate(redCardPrefab, transform.position, transform.rotation);
+            }
+            for (int i = 0; i < 4; i++) {
+                GameObject whiteCard = Instantiate(whiteCardPrefab, transform.position, transform.rotation);
+            }
+        }
     }
 
     void Start() {

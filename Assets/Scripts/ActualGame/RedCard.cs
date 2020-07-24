@@ -17,13 +17,11 @@ public class RedCard : MonoBehaviour
 
     public Text redText;
 
-    private string _whiteHand = "WhiteHand";
-
     private string _redHand = "RedHand";
 
-    private string _dropZone = "DropZone";
-
     private string _player = "Player";
+
+    public int uniqueCardNumber;
 
     public void setParent(int number) {
         redHand = GameObject.Find(_player + number + _redHand);
@@ -35,6 +33,8 @@ public class RedCard : MonoBehaviour
     public void setCardText() {
         Card newCard = deck.returnRedDeck().Dequeue();
         redText.text = newCard.description;
+        uniqueCardNumber = newCard.num;
+        
     }
 
     void Awake() {

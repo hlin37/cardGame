@@ -10,6 +10,8 @@ public class CardsDatabase : MonoBehaviour
 
     public List<Card> whiteList = new List<Card>();
 
+    private string path = "Assets/";
+
     void Start() {
         for (int typeOfCard = 0; typeOfCard < 2; typeOfCard++) {
             if (typeOfCard == 0) {
@@ -17,12 +19,13 @@ public class CardsDatabase : MonoBehaviour
                 for (int index = 0; index < 15; index++) {
                     Card redCard = new Card();
                     redCard.setText(linesOfText, index);
+                    redCard.setNumber(index);
                     redList.Add(redCard);
                 }
             }
             else {
                 string[] linesOfText = readAllLines("white");
-                for (int index = 0; index < 22; index++) {
+                for (int index = 15; index < 37; index++) {
                     Card whiteCard = new Card();
                     whiteCard.setText(linesOfText, index);
                     whiteCard.setNumber(index);
@@ -35,10 +38,10 @@ public class CardsDatabase : MonoBehaviour
     public string[] readAllLines(string color) {
         string[] lines;
         if (color.Equals("red")) {
-            lines = File.ReadAllLines("red.txt");
+            lines = File.ReadAllLines(path + "red.txt");
         }
         else {
-            lines = File.ReadAllLines("white.txt");
+            lines = File.ReadAllLines(path + "white.txt");
         }
         return lines;
     }

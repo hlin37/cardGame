@@ -13,19 +13,27 @@ public class GameManagerScript : MonoBehaviourPunCallbacks
 
     private Queue<Player> singlePlayer = new Queue<Player>();
 
+    [SerializeField]
     private GameObject singleCanvas;
 
     public GameObject playedCanvasPrefab;
 
-    private GameObject playedCanvas;
-
     public Dictionary<int, List<GameObject>> clicked = new Dictionary<int, List<GameObject>>();
-    
-    public bool selectingWhiteCards = true;
 
     private float timeLeft = 10.0f;
 
-    private bool checkingCards = false;
+    // Choose your White Cards;
+    public bool selectingWhiteCards = true;
+
+    // We are Checking Cards
+    public bool checkingCards = false;
+
+    // Choose your Red Cards;
+    public bool choosingRedCards = false;
+
+    public List<int> cardsChosen = new List<int>();
+
+    public List<int> listPlayers = new List<int>();
 
     private void generateCameras() {
         base.photonView.RPC("createCamera", RpcTarget.All);
@@ -34,8 +42,6 @@ public class GameManagerScript : MonoBehaviourPunCallbacks
     public Queue<Player> returnSinglePlayer() {
         return singlePlayer;
     }
-
-    // 650 is camera size
 
     private Vector3[] returnCameraPosition() {
         Vector3[] list = new Vector3[gameBoard.transform.childCount];
@@ -50,6 +56,7 @@ public class GameManagerScript : MonoBehaviourPunCallbacks
         Player[] listOfPlayers = shufflePlayers(PhotonNetwork.PlayerList);
         for (int i = 0; i < listOfPlayers.Length; i++) {
             singlePlayer.Enqueue(listOfPlayers[i]);
+            listPlayers.Add(listOfPlayers[i].ActorNumber);
         }
         print("This should be the first player to be single" + singlePlayer.Peek().NickName);
     }
@@ -67,29 +74,8 @@ public class GameManagerScript : MonoBehaviourPunCallbacks
         return aList;
     }
 
-    public void moveCards() {
-        GameObject[] dropZones = GameObject.FindGameObjectsWithTag("DropZone");
-        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++) {
-            if (dropZones[i].GetComponent<DropZone>().placedCards) {
-                for (int j = 1; j < dropZones[i].transform.childCount; j++) {
-                    GameObject card = dropZones[i].gameObject.transform.GetChild(1).gameObject;
-                    card.transform.SetParent(playedCanvas.transform);
-                }
-            }
-        }
-    }
-
     private void generateCanvas() {
-        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++) {
-            base.photonView.RPC("createPlayedCanvas", PhotonNetwork.PlayerList[i]);
-        }
-    }
-
-    private void printActorNumber() {
-        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++) {
-            print("This is player" + PhotonNetwork.PlayerList[i].NickName);
-            print("This is my number + " + PhotonNetwork.PlayerList[i].ActorNumber);
-        }
+        base.photonView.RPC("createPlayedCanvas", RpcTarget.All);
     }
 
     void Awake() {
@@ -102,12 +88,10 @@ public class GameManagerScript : MonoBehaviourPunCallbacks
 
     void Update() {
         timeLeft -= Time.deltaTime;
-        if (timeLeft < 0) {
-            while (!checkingCards) {
-                checkingCards = true;
-                generateCanvas();
-                moveCards();
-            }
+        if (timeLeft < 0 && !checkingCards) {
+            checkingCards = true;
+            generateCanvas();
+            //choosingRedCards = true;
         }
     }
 
@@ -118,12 +102,6 @@ public class GameManagerScript : MonoBehaviourPunCallbacks
 
     [PunRPC]
     private void createPlayedCanvas() {
-        playedCanvas = PhotonNetwork.Instantiate(playedCanvasPrefab.name, transform.position, transform.rotation);
-        playedCanvas.transform.SetParent(singleCanvas.transform);
+        GameObject playedCanvas = PhotonNetwork.Instantiate(playedCanvasPrefab.name, transform.position, transform.rotation);
     }
-    IEnumerator ExampleCoroutine()
-    {
-        //yield on a new YieldInstruction that waits for 5 seconds.
-        yield return new WaitForSeconds(60);
-    }   
 }

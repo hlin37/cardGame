@@ -77,7 +77,7 @@ public class Clickable : MonoBehaviour, ISelectHandler, IDeselectHandler, IPoint
                 }
                 else if (gameManagerScript.clicked[index].Contains(this.gameObject)) {
                     gameManagerScript.clicked[index].Remove(this.gameObject);
-                    img.color = unSelectWhite;
+                    img.color = unSelectRed;
                 }
                 else if (!gameManagerScript.clicked[index].Contains(this.gameObject)) {
                     gameManagerScript.clicked[index].Add(this.gameObject);

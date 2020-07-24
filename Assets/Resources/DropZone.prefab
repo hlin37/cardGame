@@ -60,6 +60,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -138,6 +139,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.6981132, g: 0.2272161, b: 0.334792, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -268,6 +270,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -290,7 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb28aff48ff974312a160c06a2305ef5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropZone: {fileID: 1911804166242578669}
-  whiteHand: {fileID: 2373522326994896734, guid: 036c2633f613440c0895fcdb2933643e,
-    type: 3}
-  redHand: {fileID: 7452454065653812037, guid: f307980a8b36a436ea7b21f2415819b2, type: 3}
+  button: {fileID: 0}
+  unSelectWhite: {r: 0, g: 0, b: 0, a: 0}
+  unSelectRed: {r: 0, g: 0, b: 0, a: 0}
+  view: {fileID: 0}

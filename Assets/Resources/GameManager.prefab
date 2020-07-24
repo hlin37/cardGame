@@ -47,8 +47,15 @@ MonoBehaviour:
   playerCameraPrefab: {fileID: 1250246776812366953, guid: c305d3d5eb96a43cc8244bfbb60e6aa4,
     type: 3}
   canvasesXYZ: []
-  playedCanvasPrefab: {fileID: 8154674918988520871, guid: 65e86f337aa1543ed9ab0e23acb5d624,
+  singleCanvas: {fileID: 4168171117450786354, guid: dbb99ada32fa043f8a8f0c99cb449416,
     type: 3}
+  playedCanvasPrefab: {fileID: 6491467242690089223, guid: 65e86f337aa1543ed9ab0e23acb5d624,
+    type: 3}
+  selectingWhiteCards: 1
+  checkingCards: 0
+  choosingRedCards: 0
+  cardsChosen: 
+  listPlayers: 
 --- !u!114 &6484824946176438327
 MonoBehaviour:
   m_ObjectHideFlags: 0

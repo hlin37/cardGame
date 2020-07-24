@@ -199,6 +199,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player3WhiteHand
       objectReference: {fileID: 0}
+    - target: {fileID: 1605124077344305738, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 470.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1605124077344305738, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 1627750029002485738, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -309,6 +319,26 @@ PrefabInstance:
       propertyPath: viewIdField
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 3418735986652575948, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -211
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418735986652575948, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -252.40004
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418735986652575948, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 945.19995
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418735986652575948, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 418
+      objectReference: {fileID: 0}
     - target: {fileID: 3501298292194065626, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
         type: 3}
       propertyPath: m_Name
@@ -349,6 +379,11 @@ PrefabInstance:
       propertyPath: viewIdField
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 6004323094708758047, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: viewIdField
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 6996156726439667247, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
         type: 3}
       propertyPath: m_Name
@@ -378,6 +413,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1469594850}
     m_Modifications:
+    - target: {fileID: 1605124077344305738, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 472.60004
+      objectReference: {fileID: 0}
+    - target: {fileID: 1605124077344305738, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 504.80005
+      objectReference: {fileID: 0}
     - target: {fileID: 1627750029002485738, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -483,6 +528,26 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3418735986652575948, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -252.39998
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418735986652575948, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -210
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418735986652575948, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 945.19995
+      objectReference: {fileID: 0}
+    - target: {fileID: 6004323094708758047, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: viewIdField
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 6996156726439667247, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
         type: 3}
       propertyPath: m_Name
@@ -493,6 +558,21 @@ PrefabInstance:
       propertyPath: viewIdField
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 7721108215711604798, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: m_TagString
+      value: DropZone
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655569606575076305, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 210
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655569606575076305, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -249.99995
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5b15c0098e4c4d4d9fd2855c01642f1, type: 3}
 --- !u!1001 &1317923581
@@ -502,6 +582,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 341426937015006442, guid: 55035d6b904994cb1a93bd9af07d263c,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 341426937015006442, guid: 55035d6b904994cb1a93bd9af07d263c,
+        type: 3}
+      propertyPath: viewIdField
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6808292428348175949, guid: 55035d6b904994cb1a93bd9af07d263c,
         type: 3}
       propertyPath: m_Name
@@ -662,6 +752,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player2WhiteHand
       objectReference: {fileID: 0}
+    - target: {fileID: 1605124077344305738, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 472.59998
+      objectReference: {fileID: 0}
+    - target: {fileID: 1605124077344305738, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 504.79993
+      objectReference: {fileID: 0}
     - target: {fileID: 1627750029002485738, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -772,6 +872,21 @@ PrefabInstance:
       propertyPath: viewIdField
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 3418735986652575948, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -210
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418735986652575948, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -252.80006
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418735986652575948, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 946
+      objectReference: {fileID: 0}
     - target: {fileID: 3501298292194065626, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
         type: 3}
       propertyPath: m_Name
@@ -812,6 +927,11 @@ PrefabInstance:
       propertyPath: viewIdField
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 6004323094708758047, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: viewIdField
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6996156726439667247, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
         type: 3}
       propertyPath: m_Name
@@ -837,6 +957,16 @@ PrefabInstance:
       propertyPath: m_TagString
       value: DropZone
       objectReference: {fileID: 0}
+    - target: {fileID: 8655569606575076305, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 209
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655569606575076305, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 422
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5b15c0098e4c4d4d9fd2855c01642f1, type: 3}
 --- !u!1001 &1740842326
@@ -850,6 +980,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player4WhiteHand
+      objectReference: {fileID: 0}
+    - target: {fileID: 1605124077344305738, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 472.60004
+      objectReference: {fileID: 0}
+    - target: {fileID: 1605124077344305738, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 504.80005
       objectReference: {fileID: 0}
     - target: {fileID: 1627750029002485738, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
         type: 3}
@@ -961,6 +1101,21 @@ PrefabInstance:
       propertyPath: viewIdField
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 3418735986652575948, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -252.40002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418735986652575948, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -212
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418735986652575948, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 945.19995
+      objectReference: {fileID: 0}
     - target: {fileID: 3501298292194065626, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
         type: 3}
       propertyPath: m_Name
@@ -1001,6 +1156,11 @@ PrefabInstance:
       propertyPath: viewIdField
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 6004323094708758047, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: viewIdField
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 6996156726439667247, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
         type: 3}
       propertyPath: m_Name
@@ -1015,6 +1175,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player4DropZone
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721108215711604798, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: m_TagString
+      value: DropZone
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655569606575076305, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -250.00005
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655569606575076305, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 208
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5b15c0098e4c4d4d9fd2855c01642f1, type: 3}
@@ -1140,6 +1315,26 @@ PrefabInstance:
       propertyPath: viewIdField
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 3418735986652575948, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -253.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418735986652575948, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -209
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418735986652575948, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 945
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418735986652575948, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 418
+      objectReference: {fileID: 0}
     - target: {fileID: 3501298292194065626, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
         type: 3}
       propertyPath: m_Name
@@ -1180,6 +1375,11 @@ PrefabInstance:
       propertyPath: viewIdField
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 6004323094708758047, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: viewIdField
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6996156726439667247, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
         type: 3}
       propertyPath: m_Name
@@ -1194,6 +1394,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player5DropZone
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721108215711604798, guid: e5b15c0098e4c4d4d9fd2855c01642f1,
+        type: 3}
+      propertyPath: m_TagString
+      value: DropZone
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5b15c0098e4c4d4d9fd2855c01642f1, type: 3}
@@ -1455,7 +1660,7 @@ PrefabInstance:
     - target: {fileID: 7645602597900122601, guid: 39fe6a9afd61647a38178d4a0d506256,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7645602597900122601, guid: 39fe6a9afd61647a38178d4a0d506256,
         type: 3}

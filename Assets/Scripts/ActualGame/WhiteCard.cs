@@ -19,10 +19,6 @@ public class WhiteCard : MonoBehaviourPun
 
     private string _whiteHand = "WhiteHand";
 
-    private string _redHand = "RedHand";
-
-    private string _dropZone = "DropZone";
-
     private string _player = "Player";
 
     public int uniqueCardNumber;

@@ -16,7 +16,13 @@ public class Card {
     }
 
     public void setText(string[] list, int index) {
-        description = list[index];
+        if (index < 15) {
+            description = list[index];
+        }
+        else {
+            index -= 15;
+            description = list[index];
+        }
     }
 
     public void setNumber(int number) {

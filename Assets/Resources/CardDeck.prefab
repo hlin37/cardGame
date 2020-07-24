@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6808292428348175951}
   - component: {fileID: 6808292428348175948}
+  - component: {fileID: 341426937015006442}
   m_Layer: 0
   m_Name: CardDeck
   m_TagString: Untagged
@@ -50,3 +51,24 @@ MonoBehaviour:
   _cardsDatabase: {fileID: 5282247236092505499, guid: d8cd82f6edb314056a19644d9c8eb0e6,
     type: 3}
   playerNumber: 0
+--- !u!114 &341426937015006442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6808292428348175949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
