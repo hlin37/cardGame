@@ -6,7 +6,8 @@ using Photon.Realtime;
 
 public class CameraController : MonoBehaviour
 {
-    public PhotonView cameraView;
+    [SerializeField]
+    private PhotonView cameraView;
 
     private GameManagerScript managerScript;
 
@@ -16,26 +17,37 @@ public class CameraController : MonoBehaviour
 
     private Queue<Player> singlePlayer = new Queue<Player>();
 
+    private int stopper = 0;
+
+    private Player player;
+
     void Awake() {
         gameManager = GameObject.Find("GameManager");
         managerScript = gameManager.GetComponent<GameManagerScript>();
         cameraPosition = managerScript.canvasesXYZ;
-        singlePlayer = managerScript.returnSinglePlayer();
+        singlePlayer = managerScript.singlePlayer;
     }
 
+    //switched the method order
     void Start() {
-        moveCameraToPosition();
         destroyCamera();
+        moveCameraToPosition();
     }
 
     void Update() {
-        if (managerScript.checkingCards) {
+        if (managerScript.checkingCards && stopper == 0) {
+            stopper = 1;
             moveCameraToPlayed();
         }
         // Move camera back to choose your RedCard
-        //else if (managerScript.choosingRedCards) {
-            //moveCameraToPosition();
-        //}
+        else if (managerScript.choosingRedCards && stopper == 1) {
+            stopper = 2;
+            moveCameraToPosition();
+        }
+        else if (managerScript.finalSelection && stopper == 2) {
+            stopper = 3;
+            moveCameraToPlayed();
+        }
     }
 
     private void destroyCamera() {
@@ -59,15 +71,22 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    // Instead of this.cameraView.Owner;
     private void moveCameraToPosition() {
-        Player player = this.cameraView.Owner;
-        if (player.NickName.Equals(singlePlayer.Peek().NickName)) {
-            cameraView.gameObject.transform.position = cameraPosition[cameraPosition.Length - 1];
-            cameraView.gameObject.GetComponent<Camera>().orthographicSize = 650f;
+        GameObject[] listOfCameras = GameObject.FindGameObjectsWithTag("MainCamera");
+        foreach (GameObject camera in listOfCameras) {
+            player = camera.GetComponent<PhotonView>().Owner;
+            //cameraView = camera.GetComponent<PhotonView>();
         }
-        else {
-            cameraView.gameObject.transform.position = cameraPosition[player.ActorNumber - 1];
-            cameraView.gameObject.GetComponent<Camera>().orthographicSize = 409f;
+        if (cameraView.IsMine) {
+            if (player.NickName.Equals(singlePlayer.Peek().NickName)) {
+                cameraView.gameObject.transform.position = cameraPosition[cameraPosition.Length - 1];
+                cameraView.gameObject.GetComponent<Camera>().orthographicSize = 650f;
+            }
+            else {
+                cameraView.gameObject.transform.position = cameraPosition[player.ActorNumber - 1];
+                cameraView.gameObject.GetComponent<Camera>().orthographicSize = 409f;
+            }
         }
     }
 

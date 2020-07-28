@@ -38,33 +38,64 @@ public class SubmitCards : MonoBehaviourPun
     private const byte getNumbers = 0;
 
     public void OnClick() {
-        int[] listOfNumbers = new int[2];
-        int index = int.Parse(button.transform.parent.name[6].ToString());
-        int num = 0;
-        if (gameManagerScript.clicked[index].Count != 2) {
-            print("Not enough Cards");
+        if (gameManagerScript.selectingWhiteCards) {
+            int[] listOfNumbers = new int[2];
+            int index = int.Parse(button.transform.parent.name[6].ToString());
+            int num = 0;
+            if (gameManagerScript.clicked[index].Count != 2) {
+                print("Not enough Cards");
+            }
+            else {
+                dropZone = GameObject.Find(_player + index.ToString() + _dropZone);
+                whiteHand = GameObject.Find(_player + index.ToString() + _whiteHand);
+                foreach (GameObject card in gameManagerScript.clicked[index]) {
+                    for (int i = 0; i < whiteHand.transform.childCount; i++) {
+                        if (whiteHand.transform.GetChild(i).GetComponent<WhiteCard>().uniqueCardNumber.Equals(card.GetComponent<WhiteCard>().uniqueCardNumber)) {
+                            Transform child = whiteHand.transform.GetChild(i);
+                            child.SetParent(dropZone.transform, false);
+                            listOfNumbers[num] = card.GetComponent<WhiteCard>().uniqueCardNumber;
+                            card.GetComponent<Image>().color = unSelectWhite;
+                        }
+                    }
+                    num++;
+                }
+                dropZone.GetComponent<DropZone>().placedCards = true;
+                gameManagerScript.clicked[index].Clear();
+            }
+            addNumbers(listOfNumbers);
+            object[] datas = new object[] {listOfNumbers};
+            RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others};
+            PhotonNetwork.RaiseEvent(getNumbers, datas, raiseEventOptions, SendOptions.SendUnreliable);
         }
         else {
-            dropZone = GameObject.Find(_player + index.ToString() + _dropZone);
-            whiteHand = GameObject.Find(_player + index.ToString() + _whiteHand);
-            foreach (GameObject card in gameManagerScript.clicked[index]) {
-                for (int i = 0; i < whiteHand.transform.childCount; i++) {
-                    if (whiteHand.transform.GetChild(i).GetComponent<WhiteCard>().uniqueCardNumber.Equals(card.GetComponent<WhiteCard>().uniqueCardNumber)) {
-                        Transform child = whiteHand.transform.GetChild(i);
-                        child.SetParent(dropZone.transform, false);
-                        listOfNumbers[num] = card.GetComponent<WhiteCard>().uniqueCardNumber;
-                        card.GetComponent<Image>().color = unSelectWhite;
-                    }
-                }
-                num++;
+            int[] listOfNumbers = new int[1];
+            int index = int.Parse(button.transform.parent.name[6].ToString());
+            int num = 0;
+            if (gameManagerScript.clicked[index].Count != 1) {
+                print("Not enough Cards");
             }
-            dropZone.GetComponent<DropZone>().placedCards = true;
-            gameManagerScript.clicked[index].Clear();
+            else {
+                dropZone = GameObject.Find(_player + index.ToString() + _dropZone);
+                redHand = GameObject.Find(_player + index.ToString() + _redHand);
+                foreach (GameObject card in gameManagerScript.clicked[index]) {
+                    for (int i = 0; i < redHand.transform.childCount; i++) {
+                        if (redHand.transform.GetChild(i).GetComponent<RedCard>().uniqueCardNumber.Equals(card.GetComponent<RedCard>().uniqueCardNumber)) {
+                            Transform child = redHand.transform.GetChild(i);
+                            child.SetParent(dropZone.transform, false);
+                            listOfNumbers[num] = card.GetComponent<RedCard>().uniqueCardNumber;
+                            card.GetComponent<Image>().color = unSelectRed;
+                        }
+                    }
+                    num++;
+                }
+                dropZone.GetComponent<DropZone>().placedCards = true;
+                gameManagerScript.clicked[index].Clear();
+            }
+            addNumbers(listOfNumbers);
+            object[] datas = new object[] {listOfNumbers};
+            RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others};
+            PhotonNetwork.RaiseEvent(getNumbers, datas, raiseEventOptions, SendOptions.SendUnreliable);
         }
-        addNumbers(listOfNumbers);
-        object[] datas = new object[] {listOfNumbers};
-        RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others};
-        PhotonNetwork.RaiseEvent(getNumbers, datas, raiseEventOptions, SendOptions.SendUnreliable);
     }
 
     private void OnEnable() {

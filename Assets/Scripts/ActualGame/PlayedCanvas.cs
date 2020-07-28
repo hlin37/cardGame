@@ -25,7 +25,6 @@ public class PlayedCanvas : MonoBehaviour
         GameObject[] dropZones = GameObject.FindGameObjectsWithTag("DropZone");
         GameObject[] playedCanvases = GameObject.FindGameObjectsWithTag("PlayedCanvas");
         GameObject[] listOfCameras = GameObject.FindGameObjectsWithTag("MainCamera");
-        //Player player = this.canvasOwner.Owner;
         int number = 0;
         foreach (GameObject camera in listOfCameras) {
             number = camera.GetComponent<PhotonView>().Owner.ActorNumber;
@@ -61,6 +60,37 @@ public class PlayedCanvas : MonoBehaviour
         }
     }
 
+    public void moveAllCards() {
+        List<int> list = gameManagerScript.listPlayers;
+        GameObject[] playedCanvases = GameObject.FindGameObjectsWithTag("PlayedCanvas");
+        GameObject[] listOfCameras = GameObject.FindGameObjectsWithTag("MainCamera");
+        int number = 0;
+        foreach (GameObject camera in listOfCameras) {
+            number = camera.GetComponent<PhotonView>().Owner.ActorNumber;
+        }
+        int attackingNumber = 0;
+        for (int i = 1; i < list.Count; i++) {
+            if (number == list[i]) {
+                if (i == list.Count - 1) {
+                    attackingNumber = list[1];
+                }
+                else {
+                    attackingNumber = list[i + 1];
+                }
+            }
+        }
+        foreach (GameObject canvas in playedCanvases) {
+            if (canvas.name.Contains(attackingNumber.ToString())) {
+                playingCanvas = canvas;
+            }
+        }
+        GameObject dropZone = findDropZone(number);
+        while (dropZone.transform.childCount > 0) {
+            GameObject card = dropZone.transform.GetChild(0).gameObject;
+            card.transform.SetParent(playingCanvas.transform);
+        }
+    }
+
     private void destroyCanvas() {
         GameObject[] listOfCanvases= GameObject.FindGameObjectsWithTag("PlayedCanvas");
         List<Player> oneCanvas = new List<Player>();
@@ -88,38 +118,39 @@ public class PlayedCanvas : MonoBehaviour
         playedCanvas.transform.position = newPosition;
     }
 
+    // Move attacked white cards to your canvas and choose your red card.
     private void chooseRedCards() {
         List<int> list = gameManagerScript.listPlayers;
         GameObject[] cameras = GameObject.FindGameObjectsWithTag("MainCamera");
         int number = 0;
         foreach (GameObject camera in cameras) {
-            Player player = camera.GetComponent<PhotonView>().Owner;
-            number = player.ActorNumber;
+            number = camera.GetComponent<PhotonView>().Owner.ActorNumber;
         }
         int attackingNumber = 0;
-        for (int i = 1; i < list.Count; i++) {
-            if (number == list[i]) {
-                if (i == list.Count - 1) {
-                    attackingNumber = list[1];
-                }
-                else {
-                    attackingNumber = list[i + 1];
-                }
+        if (number != list[0]) {
+            attackingNumber = list.IndexOf(number);
+            if (attackingNumber == list.Count - 1) {
+                attackingNumber = list[1];
+            }
+            else {
+                attackingNumber = list[attackingNumber + 1];
             }
         }
         GameObject[] canvases = GameObject.FindGameObjectsWithTag("PlayedCanvas");
-        GameObject whiteHand = findWhiteHand(number);
+        GameObject dropZone = findDropZone(number);
+        //Debug.Log("This is my attacking number" + attackingNumber + "This should be my dropZone " + number + "name: " + dropZone.name);
         foreach (GameObject canvas in canvases) {
             if (canvas.name.Contains(attackingNumber.ToString())) {
+                Debug.Log(canvas.name);
                 while (canvas.transform.childCount > 0) {
                     GameObject card = canvas.transform.GetChild(0).gameObject;
-                    card.transform.SetParent(whiteHand.transform);
+                    card.transform.SetParent(dropZone.transform);
                 }
             }
         }
     }
 
-    private GameObject findWhiteHand(int number) {
+    private GameObject findDropZone(int number) {
         GameObject[] dropZones = GameObject.FindGameObjectsWithTag("DropZone");
         int holder = 0;
         for (int i = 0; i < dropZones.Length; i++) {
@@ -146,9 +177,14 @@ public class PlayedCanvas : MonoBehaviour
     }
 
     void Update() {
-        // if (gameManagerScript.choosingRedCards && stopper == 0) {
-        //     stopper = 1;
-        //     chooseRedCards();
-        // }
+        if (gameManagerScript.choosingRedCards && stopper == 0) {
+            stopper = 1;
+            chooseRedCards();
+        }
+        else if (gameManagerScript.finalSelection && stopper == 1) {
+            stopper = 2;
+            moveAllCards();
+            //moveOtherCards();
+        }
     }
 }
