@@ -23,6 +23,8 @@ public class RedCard : MonoBehaviour
 
     public int uniqueCardNumber;
 
+    public Image cardSelected;
+
     public void setParent(int number) {
         redHand = GameObject.Find(_player + number + _redHand);
         It.transform.SetParent(redHand.transform);

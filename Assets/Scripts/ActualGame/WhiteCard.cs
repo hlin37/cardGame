@@ -23,6 +23,8 @@ public class WhiteCard : MonoBehaviourPun
 
     public int uniqueCardNumber;
 
+    public Image cardSelected;
+
     public void setParent(int number) {
         whiteHand = GameObject.Find(_player + number + _whiteHand);
         whiteCard.transform.SetParent(whiteHand.transform);

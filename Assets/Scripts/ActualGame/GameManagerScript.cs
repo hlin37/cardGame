@@ -13,7 +13,7 @@ public class GameManagerScript : MonoBehaviourPun
 
     public Vector3[] canvasesXYZ;
 
-    public Queue<Player> singlePlayer = new Queue<Player>();
+    public List<string> singlePlayer = new List<string>();
 
     [SerializeField]
     private GameObject singleCanvas;
@@ -22,7 +22,7 @@ public class GameManagerScript : MonoBehaviourPun
 
     public Dictionary<int, List<GameObject>> clicked = new Dictionary<int, List<GameObject>>();
 
-    private float timeLeft = 200.0f;
+    private float timeLeft = 43.0f;
 
     // Choose your White Cards;
     public bool selectingWhiteCards = true;
@@ -33,13 +33,15 @@ public class GameManagerScript : MonoBehaviourPun
     // Choose your Red Cards;
     public bool choosingRedCards = false;
 
+    public bool createdCameras = false;
+
     public bool finalSelection = false;
+
+    public bool bestDateChosen = false;
 
     public List<int> cardsChosen = new List<int>();
 
     public List<int> listPlayers = new List<int>();
-
-    public List<Player> listingsOfPlayers = new List<Player>();
 
     private const byte singleNumber = 1;
 
@@ -57,15 +59,33 @@ public class GameManagerScript : MonoBehaviourPun
     }
 
     private void chooseSinglePlayer() {
-        Player[] listOfPlayers = shufflePlayers(PhotonNetwork.PlayerList);
-        string[] someList = new string[listOfPlayers.Length];
-        for (int i = 0; i < listOfPlayers.Length; i++) {
-            listingsOfPlayers.Add(listOfPlayers[i]);
-            someList[i] = listOfPlayers[i].NickName;
+        string[] players = new string[PhotonNetwork.PlayerList.Length];
+        int[] numbers = new int[PhotonNetwork.PlayerList.Length];
+        if (PhotonNetwork.IsMasterClient) {
+            for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++) {
+                players[i] = PhotonNetwork.PlayerList[i].NickName;
+            }
+            players = shufflePlayers(players);
+            numbers = createNumbers(players);
+            addToQueue(players, numbers);
+            createdCameras = true;
+            object[] datas = new object[] { players, numbers };
+            RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others};
+            PhotonNetwork.RaiseEvent(singleNumber, datas, raiseEventOptions, SendOptions.SendUnreliable);
         }
-        object[] datas = new object[] { someList };
-        RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others};
-        PhotonNetwork.RaiseEvent(singleNumber, datas, raiseEventOptions, SendOptions.SendUnreliable);
+    }
+
+    private int[] createNumbers(string[] players) {
+        int[] numbers = new int[PhotonNetwork.PlayerList.Length];
+        for (int i = 0; i < players.Length; i++) {
+            foreach (Player player in PhotonNetwork.PlayerList) {
+                if (players[i].Equals(player.NickName)) {
+                    listPlayers.Add(player.ActorNumber);
+                    numbers[i] = player.ActorNumber;
+                }
+            }
+        }
+        return numbers;
     }
 
     private void OnEnable() {
@@ -80,38 +100,25 @@ public class GameManagerScript : MonoBehaviourPun
         if (obj.Code == singleNumber) {
             object[] datas = (object[]) obj.CustomData;
             string[] list = (string[]) datas[0];
-            createSinglePlayer(list);
+            int[] numbers = (int[]) datas[1];
+            addToQueue(list, numbers);
         }
     }
 
-    private void createSinglePlayer(string[] list) {
-        Player[] listOfPlayers = PhotonNetwork.PlayerList;
+    private void addToQueue(string[] list, int[] numbers) {
         for (int i = 0; i < list.Length; i++) {
-            foreach (Player player in listOfPlayers) {
-                if (list[i].Equals(player.NickName)) {
-                    if (!listingsOfPlayers.Contains(player)) {
-                        listingsOfPlayers.Add(player);
-                    }
-                }
+            singlePlayer.Add(list[i]);
+            if (!listPlayers.Contains(numbers[i])) {
+                listPlayers.Add(numbers[i]);
             }
         }
+        createdCameras = true;
+        Debug.Log("Debug: This should be the first player to be single" + singlePlayer[0]);
     }
 
-    public void createQueue() {
-        for (int i = 0; i < listingsOfPlayers.Count; i++) {
-            if (i == 0) {
-                print(listingsOfPlayers[i].NickName);
-            }
-            singlePlayer.Enqueue(listingsOfPlayers[i]);
-            listPlayers.Add(listingsOfPlayers[i].ActorNumber);
-        }
-        print("This should be the first player to be single" + singlePlayer.Peek().NickName);
-        Debug.Log("Debug: This should be the first player to be single" + singlePlayer.Peek().NickName);
-    }
-
-    public Player[] shufflePlayers(Player[] aList) {
-        System.Random _random = new System.Random ();
-        Player myGO;
+    public string[] shufflePlayers(string[] aList) {
+        System.Random _random = new System.Random();
+        string myGO;
         int n = aList.Length;
         for (int i = 0; i < n; i++) {
             int r = i + (int)(_random.NextDouble() * (n - i));
@@ -131,7 +138,6 @@ public class GameManagerScript : MonoBehaviourPun
         singleCanvas = GameObject.Find("SingleCanvas");
         canvasesXYZ = returnCameraPosition();
         chooseSinglePlayer();
-        createQueue();
         generateCameras();
     }
 

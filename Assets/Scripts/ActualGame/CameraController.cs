@@ -15,9 +15,10 @@ public class CameraController : MonoBehaviour
 
     private Vector3[] cameraPosition;
 
-    private Queue<Player> singlePlayer = new Queue<Player>();
+    [SerializeField]
+    private List<string> singlePlayer = new List<string>();
 
-    private int stopper = 0;
+    private int stopper = -1;
 
     private Player player;
 
@@ -31,10 +32,16 @@ public class CameraController : MonoBehaviour
     //switched the method order
     void Start() {
         destroyCamera();
-        moveCameraToPosition();
     }
 
     void Update() {
+        if (managerScript.createdCameras && stopper == -1) {
+            GameObject[] cameras = GameObject.FindGameObjectsWithTag("MainCamera");
+            if (cameras.Length == 1) {
+                stopper = 0;
+                moveCameraToPosition();
+            }
+        }
         if (managerScript.checkingCards && stopper == 0) {
             stopper = 1;
             moveCameraToPlayed();
@@ -78,14 +85,16 @@ public class CameraController : MonoBehaviour
             player = camera.GetComponent<PhotonView>().Owner;
             //cameraView = camera.GetComponent<PhotonView>();
         }
-        if (cameraView.IsMine) {
-            if (player.NickName.Equals(singlePlayer.Peek().NickName)) {
-                cameraView.gameObject.transform.position = cameraPosition[cameraPosition.Length - 1];
-                cameraView.gameObject.GetComponent<Camera>().orthographicSize = 650f;
-            }
-            else {
-                cameraView.gameObject.transform.position = cameraPosition[player.ActorNumber - 1];
-                cameraView.gameObject.GetComponent<Camera>().orthographicSize = 409f;
+        if (managerScript.createdCameras) {
+            if (cameraView.IsMine) {
+                if (player.NickName.Equals(singlePlayer[0])) {
+                    cameraView.gameObject.transform.position = cameraPosition[cameraPosition.Length - 1];
+                    cameraView.gameObject.GetComponent<Camera>().orthographicSize = 650f;
+                }
+                else {
+                    cameraView.gameObject.transform.position = cameraPosition[player.ActorNumber - 1];
+                    cameraView.gameObject.GetComponent<Camera>().orthographicSize = 409f;
+                }
             }
         }
     }

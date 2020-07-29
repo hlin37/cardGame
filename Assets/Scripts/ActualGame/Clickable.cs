@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Photon.Pun;
+using Photon.Realtime;
+using ExitGames.Client.Photon;
 
-public class Clickable : MonoBehaviour, ISelectHandler, IDeselectHandler, IPointerClickHandler
+public class Clickable : MonoBehaviourPun, ISelectHandler, IDeselectHandler, IPointerClickHandler
 {
     public static List<Clickable> allSelectables = new List<Clickable>();
 
@@ -21,6 +24,14 @@ public class Clickable : MonoBehaviour, ISelectHandler, IDeselectHandler, IPoint
     private Color unSelectWhite;
 
     private GameManagerScript gameManagerScript;
+
+    [SerializeField]
+    private Color cardSelected;
+
+    [SerializeField]
+    private Color canvasSelected;
+
+    private const byte bestDate = 2;
 
     void Awake() {
         allSelectables.Add(this);
@@ -63,7 +74,7 @@ public class Clickable : MonoBehaviour, ISelectHandler, IDeselectHandler, IPoint
                 }
             }
         }
-        else {
+        else if (gameManagerScript.choosingRedCards) {
             if (this.gameObject.name.Contains("White")) {
                 img.color = unSelectWhite;
             }
@@ -85,6 +96,62 @@ public class Clickable : MonoBehaviour, ISelectHandler, IDeselectHandler, IPoint
                 }
             }
         }
+        else if (!gameManagerScript.bestDateChosen) {
+            GameObject[] listOfCameras = GameObject.FindGameObjectsWithTag("MainCamera");
+            int singleNumber = gameManagerScript.listPlayers[0];
+            foreach (GameObject camera in listOfCameras) {
+                if (camera.GetComponent<PhotonView>().Owner.ActorNumber == singleNumber) { 
+                    if (this.gameObject.name.Contains("Card")) {
+                        GameObject canvas = this.gameObject.transform.parent.gameObject;
+                        for (int i = 0; i < canvas.transform.childCount; i++) {
+                            if (canvas.transform.GetChild(i).gameObject.name.Contains("White")) {
+                                canvas.transform.GetChild(i).gameObject.GetComponent<WhiteCard>().cardSelected.color = cardSelected;
+                            }
+                            else {
+                                canvas.transform.GetChild(i).gameObject.GetComponent<RedCard>().cardSelected.color = cardSelected;
+                            }
+                        }
+                        gameManagerScript.bestDateChosen = true;
+                        string name = canvas.name;
+                        object[] datas = new object[] {name, true};
+                        RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others};
+                        PhotonNetwork.RaiseEvent(bestDate, datas, raiseEventOptions, SendOptions.SendUnreliable);     
+                    }
+                }  
+            }
+        }
+    }
+
+    private void OnEnable() {
+        PhotonNetwork.NetworkingClient.EventReceived += NetworkingClient_EventReceived;
+    }
+
+    private void OnDisable() {
+        PhotonNetwork.NetworkingClient.EventReceived -= NetworkingClient_EventReceived;
+    }
+
+    private void NetworkingClient_EventReceived(EventData obj) {
+        if (obj.Code == bestDate) {
+            object[] datas = (object[]) obj.CustomData;
+            string name = (string) datas[0];
+            bool chosen = (bool) datas[1];
+            showChosen(name, chosen);
+        }
+    }
+
+    private void showChosen(string name, bool chosen) {
+        GameObject canvas = GameObject.Find(name);
+        for (int i = 0; i < canvas.transform.childCount; i++) {
+            if (canvas.transform.GetChild(i).gameObject.name.Contains("White")) {
+                Debug.Log(canvas.transform.GetChild(i).gameObject.name);
+                canvas.transform.GetChild(i).gameObject.GetComponent<WhiteCard>().cardSelected.color = cardSelected;
+            }
+            else {
+                Debug.Log(canvas.transform.GetChild(i).gameObject.name);
+                canvas.transform.GetChild(i).gameObject.GetComponent<RedCard>().cardSelected.color = cardSelected;
+            }
+        }
+        gameManagerScript.bestDateChosen = chosen;
     }
 
     public void OnDeselect(BaseEventData eventData) {
@@ -94,9 +161,5 @@ public class Clickable : MonoBehaviour, ISelectHandler, IDeselectHandler, IPoint
         else {
             img.color = unSelectRed;
         }
-    }
-
-    public void returntoWhite() {
-        img.color = unSelectWhite;
     }
 }

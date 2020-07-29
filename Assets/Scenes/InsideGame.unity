@@ -1617,6 +1617,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dbb99ada32fa043f8a8f0c99cb449416, type: 3}
+--- !u!1 &1923718567261252004 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4168171117450786354, guid: dbb99ada32fa043f8a8f0c99cb449416,
+    type: 3}
+  m_PrefabInstance: {fileID: 1923718567261252003}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1923718567261252005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923718567261252004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48a15de6ef4a048c7af05985756efed0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardSelected: {r: 0, g: 0.70980394, b: 1, a: 1}
+  canvasSelected: {r: 1, g: 0.019607844, b: 0.003921569, a: 1}
 --- !u!1001 &5282247234921149871
 PrefabInstance:
   m_ObjectHideFlags: 0

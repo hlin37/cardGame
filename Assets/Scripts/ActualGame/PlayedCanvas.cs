@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.UI;
 
 public class PlayedCanvas : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class PlayedCanvas : MonoBehaviour
     private GameManagerScript gameManagerScript;
 
     private GameObject playingCanvas;
+
+    public Image canvasSelected;
 
     private int stopper = 0;
 
@@ -60,6 +63,39 @@ public class PlayedCanvas : MonoBehaviour
         }
     }
 
+    public void moveAllRedCards() {
+        List<int> list = gameManagerScript.listPlayers;
+        GameObject[] listOfCameras = GameObject.FindGameObjectsWithTag("MainCamera");
+        GameObject[] redCards = GameObject.FindGameObjectsWithTag("RedCard");
+        GameObject[] playedCanvases = GameObject.FindGameObjectsWithTag("PlayedCanvas");
+        
+        // think about this. too many for loops. logic is something
+        for (int i = 0; i < list.Count; i++) {
+            for (int num = (PhotonNetwork.PlayerList.Length * 2 - 2); num < gameManagerScript.cardsChosen.Count; num++) {
+                foreach (GameObject redCard in redCards) {
+                    if (redCard.GetComponent<RedCard>().uniqueCardNumber.Equals(gameManagerScript.cardsChosen[num])) {
+                        if (!redCard.transform.parent.name.Contains("Played")) {
+                            int originalNumber = int.Parse(redCard.transform.parent.name[6].ToString());
+                            int attackingNumber = list.IndexOf(originalNumber);
+                            if (attackingNumber == list.Count - 1) {
+                                attackingNumber = list[1];
+                            }
+                            else {
+                                attackingNumber = list[attackingNumber + 1];
+                            }
+                            foreach (GameObject canvas in playedCanvases) {
+                                if (canvas.name.Contains(attackingNumber.ToString())) {
+                                    playingCanvas = canvas;
+                                }
+                            }
+                            redCard.transform.SetParent(playingCanvas.transform);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     public void moveAllCards() {
         List<int> list = gameManagerScript.listPlayers;
         GameObject[] playedCanvases = GameObject.FindGameObjectsWithTag("PlayedCanvas");
@@ -85,8 +121,8 @@ public class PlayedCanvas : MonoBehaviour
             }
         }
         GameObject dropZone = findDropZone(number);
-        while (dropZone.transform.childCount > 0) {
-            GameObject card = dropZone.transform.GetChild(0).gameObject;
+        while (dropZone.transform.childCount > 1) {
+            GameObject card = dropZone.transform.GetChild(1).gameObject;
             card.transform.SetParent(playingCanvas.transform);
         }
     }
@@ -141,7 +177,6 @@ public class PlayedCanvas : MonoBehaviour
         //Debug.Log("This is my attacking number" + attackingNumber + "This should be my dropZone " + number + "name: " + dropZone.name);
         foreach (GameObject canvas in canvases) {
             if (canvas.name.Contains(attackingNumber.ToString())) {
-                Debug.Log(canvas.name);
                 while (canvas.transform.childCount > 0) {
                     GameObject card = canvas.transform.GetChild(0).gameObject;
                     card.transform.SetParent(dropZone.transform);
@@ -184,7 +219,7 @@ public class PlayedCanvas : MonoBehaviour
         else if (gameManagerScript.finalSelection && stopper == 1) {
             stopper = 2;
             moveAllCards();
-            //moveOtherCards();
+            moveAllRedCards();
         }
     }
 }

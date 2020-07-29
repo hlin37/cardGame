@@ -137,3 +137,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playedCanvas: {fileID: 6491467242690089223}
   canvasOwner: {fileID: 7921103082883886744}
+  canvasSelected: {fileID: 0}

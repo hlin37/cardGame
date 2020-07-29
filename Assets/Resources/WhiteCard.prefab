@@ -175,6 +175,7 @@ MonoBehaviour:
   _deck: {fileID: 6808292428348175949, guid: 55035d6b904994cb1a93bd9af07d263c, type: 3}
   whiteText: {fileID: 8042347761963127284}
   uniqueCardNumber: 0
+  cardSelected: {fileID: 927611588573581515}
 --- !u!114 &4987178174074479813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,6 +214,8 @@ MonoBehaviour:
   selectBlue: {r: 0, g: 0.6748581, b: 1, a: 1}
   unSelectRed: {r: 1, g: 0, b: 0, a: 1}
   unSelectWhite: {r: 1, g: 1, b: 1, a: 1}
+  cardSelected: {r: 0, g: 0.70980394, b: 1, a: 1}
+  canvasSelected: {r: 1, g: 0, b: 0.2901961, a: 0}
 --- !u!114 &4931248473334159456
 MonoBehaviour:
   m_ObjectHideFlags: 0
