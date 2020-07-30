@@ -33,6 +33,14 @@ public class Clickable : MonoBehaviourPun, ISelectHandler, IDeselectHandler, IPo
 
     private const byte bestDate = 2;
 
+    // private float firstClickTime, timeBetweenClicks;
+
+    // private bool coroutineAllowed;
+
+    // private int clickCounter;
+
+    public bool doubleClicked = false;
+
     void Awake() {
         allSelectables.Add(this);
         img = this.GetComponent<Image>();
@@ -41,8 +49,21 @@ public class Clickable : MonoBehaviourPun, ISelectHandler, IDeselectHandler, IPo
     void Start() {
         GameObject gameManager = GameObject.Find("GameManager");
         gameManagerScript = gameManager.GetComponent<GameManagerScript>();
-
+        // firstClickTime = 0f;
+        // timeBetweenClicks = 0.2f;
+        // clickCounter = 0;
+        // coroutineAllowed = true;
     }
+
+    // void Update() {
+    //     if (Input.GetMouseButtonUp(0)) {
+    //         clickCounter += 1;
+    //     }
+    //     if (clickCounter == 1 && coroutineAllowed) {
+    //         firstClickTime = Time.time;
+    //         StartCoroutine(DoubleClickDetection());
+    //     }
+    // }
 
     public void OnPointerClick(PointerEventData eventData) {
         OnSelect(eventData);
@@ -115,7 +136,7 @@ public class Clickable : MonoBehaviourPun, ISelectHandler, IDeselectHandler, IPo
                         string name = canvas.name;
                         object[] datas = new object[] {name, true};
                         RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others};
-                        PhotonNetwork.RaiseEvent(bestDate, datas, raiseEventOptions, SendOptions.SendUnreliable);     
+                        PhotonNetwork.RaiseEvent(bestDate, datas, raiseEventOptions, SendOptions.SendUnreliable);
                     }
                 }  
             }
@@ -143,11 +164,9 @@ public class Clickable : MonoBehaviourPun, ISelectHandler, IDeselectHandler, IPo
         GameObject canvas = GameObject.Find(name);
         for (int i = 0; i < canvas.transform.childCount; i++) {
             if (canvas.transform.GetChild(i).gameObject.name.Contains("White")) {
-                Debug.Log(canvas.transform.GetChild(i).gameObject.name);
                 canvas.transform.GetChild(i).gameObject.GetComponent<WhiteCard>().cardSelected.color = cardSelected;
             }
             else {
-                Debug.Log(canvas.transform.GetChild(i).gameObject.name);
                 canvas.transform.GetChild(i).gameObject.GetComponent<RedCard>().cardSelected.color = cardSelected;
             }
         }
@@ -162,4 +181,18 @@ public class Clickable : MonoBehaviourPun, ISelectHandler, IDeselectHandler, IPo
             img.color = unSelectRed;
         }
     }
-}
+
+    // private IEnumerator DoubleClickDetection() {
+    //     coroutineAllowed = false;
+    //     while (Time.time < firstClickTime + timeBetweenClicks) {
+    //         if (clickCounter == 2) {
+    //             doubleClicked = true;
+    //             break;
+    //         }
+    //         yield return new WaitForEndOfFrame();
+    //     }
+    //     clickCounter = 0;
+    //     firstClickTime = 0f;
+    //     coroutineAllowed = true;
+    // }
+}   

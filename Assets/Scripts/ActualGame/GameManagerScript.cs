@@ -22,7 +22,7 @@ public class GameManagerScript : MonoBehaviourPun
 
     public Dictionary<int, List<GameObject>> clicked = new Dictionary<int, List<GameObject>>();
 
-    private float timeLeft = 43.0f;
+    private float timeLeft = 200.0f;
 
     // Choose your White Cards;
     public bool selectingWhiteCards = true;
@@ -113,7 +113,6 @@ public class GameManagerScript : MonoBehaviourPun
             }
         }
         createdCameras = true;
-        Debug.Log("Debug: This should be the first player to be single" + singlePlayer[0]);
     }
 
     public string[] shufflePlayers(string[] aList) {

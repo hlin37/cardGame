@@ -1635,8 +1635,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48a15de6ef4a048c7af05985756efed0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardSelected: {r: 0, g: 0.70980394, b: 1, a: 1}
-  canvasSelected: {r: 1, g: 0.019607844, b: 0.003921569, a: 1}
 --- !u!1001 &5282247234921149871
 PrefabInstance:
   m_ObjectHideFlags: 0
